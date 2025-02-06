@@ -41,5 +41,7 @@ SELECT City, COUNT(City) AS `Number of Customers` FROM customers where City IN('
 SELECT CustomerName, Address, PostalCode FROM customers WHERE City = "London";
 
 -- Which country has the highest supplier
-SELECT Country, COUNT(Country) AS `Number of Suppliers` FROM suppliers GROUP BY Country ORDER BY COUNT(Country) DESC LIMIT 2;
+SELECT Country, COUNT(Country) AS `Number of Suppliers` FROM suppliers GROUP BY Country ORDER BY COUNT(Country) DESC LIMIT 1;
+
+
 
