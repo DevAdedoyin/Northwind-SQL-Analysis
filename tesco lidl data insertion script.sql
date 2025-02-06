@@ -21,10 +21,8 @@ INSERT INTO categories VALUES
 	(7, 'Produce', 'Dried fruit and bean curd', '\x'),
 	(8, 'Seafood', 'Seaweed and fish', '\x');
 
-select customer_id, count(customer_id) FROM customers where count(customer_id) > 2;
-
 -- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: -
-INSERT IGNORE INTO customers VALUES
+INSERT INTO customers VALUES
 	('ALFKI', 'Alfreds Futterkiste', 'Maria Anders', 'Sales Representative', 'Obere Str. 57', 'Berlin', NULL, '12209', 'Germany', '030-0074321', '030-0076545'),
 	('ANATR', 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Owner', 'Avda. de la Constitución 2222', 'México D.F.', NULL, '05021', 'Mexico', '(5) 555-4729', '(5) 555-3745'),
 	('ANTON', 'Antonio Moreno Taquería', 'Antonio Moreno', 'Owner', 'Mataderos  2312', 'México D.F.', NULL, '05023', 'Mexico', '(5) 555-3932', NULL),
@@ -195,10 +193,7 @@ INSERT INTO territories VALUES
 	('98104', 'Seattle', 2);
 
 
---
--- Data for Name: employee_territories; Type: TABLE DATA; Schema: public; Owner: -
---
-
+-- Data for Name: employee_territories; Type: TABLE DATA; Schema: public; Owner: 
 INSERT INTO employee_territories VALUES
 	(1, '06897'),
 	(1, '19713'),
@@ -252,7 +247,7 @@ INSERT INTO employee_territories VALUES
 
 
 -- Data for Name: shippers; Type: TABLE DATA; Schema: public; Owner: -
-INSERT INTO public.shippers VALUES
+INSERT INTO shippers VALUES
 	(1, 'Speedy Express', '(503) 555-9831'),
 	(2, 'United Package', '(503) 555-3199'),
 	(3, 'Federal Shipping', '(503) 555-9931'),

@@ -1,6 +1,3 @@
---
--- PostgreSQL database dump
---
 SET SESSION MAX_EXECUTION_TIME = 0; 
 SET SESSION innodb_lock_wait_timeout = 0;
 SET NAMES 'utf8mb4';
@@ -30,6 +27,8 @@ DROP DATABASE IF EXISTS Tesco_Lidl;
 
 CREATE DATABASE Tesco_Lidl;
 
+USE Tesco_Lidl;
+
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE categories (
     category_id smallint NOT NULL PRIMARY KEY,
@@ -47,7 +46,7 @@ CREATE TABLE customer_demographics (
 
 -- Name: customers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE customers (
-    customer_id char NOT NULL PRIMARY KEY,
+    customer_id varchar(10) ,
     company_name character varying(40) NOT NULL,
     contact_name character varying(30),
     contact_title character varying(30),
@@ -57,9 +56,9 @@ CREATE TABLE customers (
     postal_code character varying(10),
     country character varying(15),
     phone character varying(24),
-    fax character varying(24)
+    fax character varying(24),
+    primary key(customer_id)
 );
-
 
 -- Name: customer_customer_demo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE customer_customer_demo (
@@ -166,7 +165,6 @@ CREATE TABLE orders (
 );
 
 
-
 -- Name: territories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE territories (
     territory_id character varying(20) NOT NULL PRIMARY KEY,
@@ -175,26 +173,27 @@ CREATE TABLE territories (
 	FOREIGN KEY (region_id) REFERENCES region(region_id)
 );
 
+
 -- Name: employee_territories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE employee_territories (
-    employee_id smallint NOT NULL,
-    territory_id character varying(20) NOT NULL,
+    employee_id SMALLINT NOT NULL,
+    territory_id VARCHAR(20) NOT NULL,
     PRIMARY KEY (employee_id, territory_id),
-    FOREIGN KEY (territory_id) REFERENCES territories,
-    FOREIGN KEY (employee_id) REFERENCES employees
+    FOREIGN KEY (territory_id) REFERENCES territories(territory_id), 
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id) 
 );
 
 
 -- Name: order_details; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE order_details (
-    order_id smallint NOT NULL,
-    product_id smallint NOT NULL,
-    unit_price real NOT NULL,
-    quantity smallint NOT NULL,
-    discount real NOT NULL,
+    order_id SMALLINT NOT NULL,
+    product_id SMALLINT NOT NULL,
+    unit_price REAL NOT NULL,
+    quantity SMALLINT NOT NULL,
+    discount REAL NOT NULL,
     PRIMARY KEY (order_id, product_id),
-    FOREIGN KEY (product_id) REFERENCES products,
-    FOREIGN KEY (order_id) REFERENCES orders
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 
 
