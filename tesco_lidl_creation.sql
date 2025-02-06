@@ -113,19 +113,20 @@ CREATE TABLE suppliers (
 
 -- Name: products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE products (
-    product_id smallint NOT NULL PRIMARY KEY,
-    product_name character varying(40) NOT NULL,
-    supplier_id smallint,
-    category_id smallint,
-    quantity_per_unit character varying(20),
-    unit_price real,
-    units_in_stock smallint,
-    units_on_order smallint,
-    reorder_level smallint,
-    discontinued integer NOT NULL,
-	FOREIGN KEY (category_id) REFERENCES categories,
-	FOREIGN KEY (supplier_id) REFERENCES suppliers
+    product_id SMALLINT NOT NULL PRIMARY KEY,
+    product_name VARCHAR(40) NOT NULL,
+    supplier_id SMALLINT,
+    category_id SMALLINT,
+    quantity_per_unit VARCHAR(20),
+    unit_price REAL,
+    units_in_stock SMALLINT,
+    units_on_order SMALLINT,
+    reorder_level SMALLINT,
+    discontinued INTEGER NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id), -- Specify column
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id)  -- Specify column
 );
+
 
 
 -- Name: region; Type: TABLE; Schema: public; Owner: -; Tablespace: 
@@ -145,33 +146,33 @@ CREATE TABLE shippers (
 
 -- Name: orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE orders (
-    order_id smallint NOT NULL PRIMARY KEY,
-    customer_id char,
-    employee_id smallint,
-    order_date date,
-    required_date date,
-    shipped_date date,
-    ship_via smallint,
-    freight real,
-    ship_name character varying(40),
-    ship_address character varying(60),
-    ship_city character varying(15),
-    ship_region character varying(15),
-    ship_postal_code character varying(10),
-    ship_country character varying(15),
-    FOREIGN KEY (customer_id) REFERENCES customers,
-    FOREIGN KEY (employee_id) REFERENCES employees,
-    FOREIGN KEY (ship_via) REFERENCES shippers
+    order_id SMALLINT NOT NULL PRIMARY KEY,
+    customer_id CHAR(10),  -- Adjust length based on the actual data type in customers table
+    employee_id SMALLINT,
+    order_date DATE,
+    required_date DATE,
+    shipped_date DATE,
+    ship_via SMALLINT,
+    freight REAL,
+    ship_name VARCHAR(40),
+    ship_address VARCHAR(60),
+    ship_city VARCHAR(15),
+    ship_region VARCHAR(15),
+    ship_postal_code VARCHAR(10),
+    ship_country VARCHAR(15),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id), 
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),  
+    FOREIGN KEY (ship_via) REFERENCES shippers(shipper_id)      
 );
 
 
--- Name: territories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 
+-- Name: territories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 CREATE TABLE territories (
     territory_id character varying(20) NOT NULL PRIMARY KEY,
-    territory_description char NOT NULL,
+    territory_description char(50) NOT NULL,
     region_id smallint NOT NULL,
-	FOREIGN KEY (region_id) REFERENCES region
+	FOREIGN KEY (region_id) REFERENCES region(region_id)
 );
 
 -- Name: employee_territories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
