@@ -32,9 +32,14 @@ SELECT ShipperName, Phone FROM shippers WHERE ShipperName IN('Federal Shipping',
 SELECT Country, COUNT(Country) AS `Number of Customers` FROM customers GROUP BY Country ORDER BY `Number of Customers` DESC;
 
 -- Calculate the total number of customers we have in the `Number of Customers`
-SELECT Count(Country) AS `Total Number of Countries` FROM customers;
+SELECT COUNT(Country) AS `Total Number of Countries` FROM customers;
 
 -- Count the number of customers we have in London and Madrid City 
-SELECT City, Count(City) AS `Number of Customers` FROM customers where City IN('London', 'Madrid') GROUP BY City;
+SELECT City, COUNT(City) AS `Number of Customers` FROM customers where City IN('London', 'Madrid') GROUP BY City;
 
 -- Get the Name, address and postal code of customers in london 
+SELECT CustomerName, Address, PostalCode FROM customers WHERE City = "London";
+
+-- Which country has the highest supplier
+SELECT Country, COUNT(Country) AS `Number of Suppliers` FROM suppliers GROUP BY Country ORDER BY COUNT(Country) DESC LIMIT 2;
+
