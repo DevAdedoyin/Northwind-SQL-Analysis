@@ -25,3 +25,16 @@ SELECT FirstName, Notes FROM employees;
 -- Display detail of the customer(s) who has Maria Larsson has their contact name 
 SELECT * FROM customers where ContactName = 'Maria Larsson';
 
+-- Please get the phone number of Federal Shipping and United Package
+SELECT ShipperName, Phone FROM shippers WHERE ShipperName IN('Federal Shipping', 'United Package');
+
+-- Count the number of customers we have in each country
+SELECT Country, COUNT(Country) AS `Number of Customers` FROM customers GROUP BY Country ORDER BY `Number of Customers` DESC;
+
+-- Calculate the total number of customers we have in the `Number of Customers`
+SELECT Count(Country) AS `Total Number of Countries` FROM customers;
+
+-- Count the number of customers we have in London and Madrid City 
+SELECT City, Count(City) AS `Number of Customers` FROM customers where City IN('London', 'Madrid') GROUP BY City;
+
+-- Get the Name, address and postal code of customers in london 
