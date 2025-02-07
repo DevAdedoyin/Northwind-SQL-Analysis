@@ -68,4 +68,10 @@ SELECT SUM(discontinued) AS `Total Discontinued Orders` FROM products;
 SELECT ROUND(AVG(unit_price), 2) AS `Average Unit Price` FROM products;
 
 -- What is the total freight order to 2dp
-SELECT ROUND(SUM(freight)) AS `Total Freight` FROM orders;
+SELECT ROUND(SUM(freight), 2) AS `Total Freight` FROM orders;
+
+-- Count order Per Day from the order table
+SELECT  order_date, COUNT(order_date) AS `Order Count` FROM orders GROUP BY order_date ORDER BY `Order Count` DESC;
+
+-- Retrieve product_name and unit_price from the Products table with the Highest Unit Price
+SELECT product_name, unit_price FROM products ORDER BY unit_price DESC LIMIT 1;
