@@ -75,3 +75,55 @@ SELECT  order_date, COUNT(order_date) AS `Order Count` FROM orders GROUP BY orde
 
 -- Retrieve product_name and unit_price from the Products table with the Highest Unit Price
 SELECT product_name, unit_price FROM products ORDER BY unit_price DESC LIMIT 1;
+
+-- Display the order id and full date in letter format
+SELECT order_id, DATE_FORMAT(order_date, '%a %D %M, %Y') AS `Date` FROM orders LIMIT 20;
+
+-- Display the category each product belongs to
+SELECT products.category_id, products.product_name, categories.category_name
+FROM products
+INNER JOIN categories ON products.category_id = categories.category_id; 
+
+-- Find the total unit price for products whose categories are beverages
+SELECT categories.category_name, SUM(products.unit_price) AS `Total Beverage Unit Price`
+FROM products
+INNER JOIN categories ON products.category_id = categories.category_id
+WHERE categories.category_name = 'Beverages';
+
+-- Display the products that his between 40 to 100 worth unit price
+SELECT products.product_name, products.unit_price FROM products WHERE unit_price BETWEEN 40 AND 100;
+
+-- Retrieve the product_name and total_price from the order_details table, calculating the total_price as quantity multiplied by unit_price.
+SELECT products.product_name, order_details.unit_price * order_details.quantity AS `Total Price`
+FROM order_details
+INNER JOIN products ON products.product_id = order_details.product_id;
+
+-- Identify the Most Frequently Sold Product from order_details
+SELECT products.product_name, COUNT(order_details.product_id) AS `Times Sold`
+FROM order_details
+JOIN products ON products.product_id = order_details.product_id
+GROUP BY order_details.product_id
+ORDER BY `Times Sold` DESC LIMIT 1;
+
+-- Find the Products Not Sold from Products table
+SELECT products.product_id, products.product_name
+FROM products
+WHERE products.product_id NOT IN (SELECT DISTINCT order_details.product_id FROM order_details);
+
+-- Calculate the total revenue generated from sales for each product category.
+SELECT categories.category_name, ROUND(SUM(order_details.unit_price * order_details.quantity), 2) AS `Total Revenue`
+FROM categories
+JOIN products ON categories.category_id = products.category_id
+JOIN order_details ON order_details.product_id = products.product_id
+GROUP BY categories.category_name
+ORDER BY `Total Revenue` DESC;
+
+-- Find the product category with the highest average unit price.
+SELECT categories.category_name, AVG(order_details.unit_price) AS `Average Unit Price`
+FROM categories
+JOIN products ON products.category_id = categories.category_id 
+JOIN order_details ON order_details.product_id = products.product_id
+GROUP BY categories.category_name
+ORDER BY `Average Unit Price` DESC LIMIT 1;
+
+-- 
