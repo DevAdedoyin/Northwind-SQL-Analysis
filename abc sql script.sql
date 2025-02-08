@@ -156,7 +156,7 @@ JOIN products ON products.product_id = order_details.product_id;
 
 -- Rank products based on total sales revenue.
 SELECT products.product_name, ROUND(SUM(order_details.unit_price * order_details.quantity), 2) AS `Total Sales Revenue`, 
-RANK() OVER (ORDER BY `Total Sales Revenue` DESC) AS `Revenue Rank`
+RANK() OVER (ORDER BY ROUND(SUM(order_details.unit_price * order_details.quantity), 2) DESC) AS `Revenue Rank`
 FROM order_details
 JOIN products ON order_details.product_id = products.product_id
 GROUP BY products.product_name;
@@ -172,3 +172,24 @@ JOIN products ON products.product_id = order_details.product_id
 JOIN orders ON orders.order_id = order_details.order_id
 JOIN categories ON categories.category_id = products.category_id
 ) a;
+
+-- Categorize sales as "High", "Medium", or "Low" based on total price (e.g., > $200 is High, $100-$200 is Medium, < $100 is Low)
+SELECT order_details.order_id, order_details.unit_price * order_details.quantity AS Amount,
+	CASE
+		WHEN order_details.unit_price * order_details.quantity >= 1000 THEN 'HIGH'
+		WHEN order_details.unit_price * order_details.quantity BETWEEN 499 AND 1000 THEN 'MEDIUM'
+		ELSE 'LOW'
+	END AS `Order Category`
+FROM order_details;
+
+-- Identify sales where the quantity sold is greater than the average quantity sold.
+SELECT *
+FROM order_details
+WHERE order_details.quantity > (SELECT AVG(order_details.quantity) FROM order_details);
+
+-- Extract the month and year from the sale date and count the number of sales for each month.
+SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS `Month`, COUNT(*) AS `Number of Sales per Month`
+FROM orders
+JOIN order_details ON orders.order_id = order_details.order_id
+GROUP BY `Month`;
+
