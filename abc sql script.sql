@@ -126,4 +126,13 @@ JOIN order_details ON order_details.product_id = products.product_id
 GROUP BY categories.category_name
 ORDER BY `Average Unit Price` DESC LIMIT 1;
 
--- 
+-- Count the number of orders made in each month.
+SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, COUNT(*) AS `Order Count`
+FROM orders
+GROUP BY month;
+
+-- Retrieve order details for Products with 'Coffee' in their name
+SELECT order_details.order_id, products.product_name, order_details.product_id, order_details.unit_price
+FROM order_details
+JOIN products ON products.product_id = order_details.product_id
+WHERE products.product_name LIKE '%Coffee%';
