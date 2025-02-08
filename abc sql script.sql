@@ -193,3 +193,16 @@ FROM orders
 JOIN order_details ON orders.order_id = order_details.order_id
 GROUP BY `Month`;
 
+-- Calculate the number of days between the current date and the sale date for each sale.
+SELECT order_details.order_id, DATEDIFF(NOW(), orders.order_date) AS `Day since sold`
+FROM order_details
+JOIN orders ON orders.order_id = order_details.order_id;
+
+-- Identify sales made during weekdays versus weekends
+SELECT order_details.order_id, 
+	CASE
+		WHEN DAYOFWEEK(orders.order_date) IN (1, 7) THEN 'Weekend'
+        ELSE 'Weekday'
+	END AS `Day type`
+FROM order_details
+JOIN orders ON order_details.order_id = orders.order_id;
