@@ -132,7 +132,43 @@ FROM orders
 GROUP BY month;
 
 -- Retrieve order details for Products with 'Coffee' in their name
-SELECT order_details.order_id, products.product_name, order_details.product_id, order_details.unit_price
+SELECT order_details.order_id, orders.order_date, products.product_name, order_details.product_id, order_details.unit_price
 FROM order_details
 JOIN products ON products.product_id = order_details.product_id
+JOIN orders ON order_details.order_id = orders.order_id
 WHERE products.product_name LIKE '%Coffee%';
+
+-- Determine the average quantity sold for products with a unit price greater than 40.
+SELECT AVG(order_details.quantity) AS `Average Quantity Sold`
+FROM order_details
+WHERE order_details.unit_price > 40;
+
+-- Retrieve the product name and total sales revenue for each product.
+SELECT products.product_name, SUM(order_details.unit_price * order_details.quantity) AS `Total Sales Revenue`
+FROM order_details
+JOIN products ON order_details.product_id = products.product_id
+GROUP BY products.product_name;
+
+-- List all sales along with the corresponding product names.
+SELECT products.product_name, order_details.order_id, order_details.quantity, order_details.unit_price
+FROM order_details
+JOIN products ON products.product_id = order_details.product_id;
+
+-- Rank products based on total sales revenue.
+SELECT products.product_name, ROUND(SUM(order_details.unit_price * order_details.quantity), 2) AS `Total Sales Revenue`, 
+RANK() OVER (ORDER BY `Total Sales Revenue` DESC) AS `Revenue Rank`
+FROM order_details
+JOIN products ON order_details.product_id = products.product_id
+GROUP BY products.product_name;
+
+-- Calculate the running total revenue for each product category.
+SELECT a.category_name, a.product_name, 
+ROUND(a.total_running_revenue) AS `Total Sales Revenue`  
+FROM (
+SELECT categories.category_name, products.product_name, orders.order_date,
+SUM(order_details.unit_price * order_details.quantity) OVER (PARTITION BY categories.category_name ORDER BY orders.order_date) total_running_revenue
+FROM order_details
+JOIN products ON products.product_id = order_details.product_id
+JOIN orders ON orders.order_id = order_details.order_id
+JOIN categories ON categories.category_id = products.category_id
+) a;
