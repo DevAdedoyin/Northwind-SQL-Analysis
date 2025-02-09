@@ -1,5 +1,5 @@
 -- Use the northwind schema
-USE Tesco_Lidl;
+USE northwind;
 
 -- Retrieve all columns from the customers table.
 SELECT * FROM customers; 
