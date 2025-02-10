@@ -206,3 +206,12 @@ SELECT order_details.order_id,
 	END AS `Day type`
 FROM order_details
 JOIN orders ON order_details.order_id = orders.order_id;
+
+-- List the Top 3 Products by Revenue Contribution Percentage
+SELECT products.product_name, SUM(order_details.unit_price * order_details.quantity) AS `Revenue`,
+(SUM(order_details.unit_price * order_details.quantity) / 
+(SELECT SUM(order_details.unit_price * order_details.quantity) FROM order_details)) * 100 AS `Percentage Revenue`
+FROM order_details
+JOIN products ON products.product_id = order_details.product_id
+GROUP BY products.product_name
+ORDER BY `Percentage Revenue` DESC LIMIT 3;
