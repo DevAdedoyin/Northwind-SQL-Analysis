@@ -215,3 +215,14 @@ FROM order_details
 JOIN products ON products.product_id = order_details.product_id
 GROUP BY products.product_name
 ORDER BY `Percentage Revenue` DESC LIMIT 3;
+
+/* Write a query to create a view named Total_Sales that displays the total sales amount 
+   for each product along with their names and categories.
+*/
+CREATE VIEW Total_Sales AS
+SELECT products.product_name, categories.category_name, SUM(order_details.quantity * order_details.unit_price) AS `Total Sales`
+FROM order_details
+JOIN products ON order_details.product_id = products.product_id
+JOIN categories ON categories.category_id = products.category_id
+GROUP BY products.product_id;
+SELECT * FROM Total_Sales;
