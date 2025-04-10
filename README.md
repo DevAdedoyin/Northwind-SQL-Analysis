@@ -285,3 +285,70 @@ GROUP BY products.product_name;
 
 ---
 
+## 📊 Order Analysis
+
+- Orders on specific dates
+- Weekday vs weekend sales
+- Time since orders were placed
+- Sales with above-average quantities
+
+```
+-- Get data for all orders that were shipped on 1997-02-14
+SELECT * FROM orders WHERE shipped_date = '1997-02-14';
+```
+![Screenshot 2025-04-10 at 14 29 00](https://github.com/user-attachments/assets/ae570754-c8a4-4fb5-8299-914ee69e317f)
+<br />
+<br />
+```
+-- Count order per day from the orders table
+SELECT order_date, COUNT(order_date) AS `Order Count` FROM orders GROUP BY order_date ORDER BY `Order Count` DESC;
+```
+![Screenshot 2025-04-10 at 14 45 12](https://github.com/user-attachments/assets/47b3af78-e9ae-4395-b0ea-7ed33692e35c)
+<br />
+<br />
+```
+-- Display the order id and full date in letter format
+SELECT order_id, DATE_FORMAT(order_date, '%a %D %M, %Y') AS `Date` FROM orders LIMIT 20;
+```
+![Screenshot 2025-04-10 at 18 29 23](https://github.com/user-attachments/assets/e80e4c29-a0ca-4f60-bb02-6c977c83fc4d)
+<br />
+<br />
+```
+-- Count the number of orders made in each month.
+SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, COUNT(*) AS `Order Count`
+FROM orders
+GROUP BY month;
+```
+![Screenshot 2025-04-10 at 18 34 33](https://github.com/user-attachments/assets/97e355ec-23ef-4a8d-a03c-3bb42c514163)
+<br />
+<br />
+```
+-- Extract the month and year from the sale date and count the number of sales for each month.
+SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS `Month`, COUNT(*) AS `Number of Sales per Month`
+FROM orders
+JOIN order_details ON orders.order_id = order_details.order_id
+GROUP BY `Month`;
+```
+![Screenshot 2025-04-10 at 18 37 16](https://github.com/user-attachments/assets/90348591-69a3-4165-aa4b-9049e47ead72)
+<br />
+<br />
+```
+-- Calculate the number of days between the current date and the sale date for each sale.
+SELECT order_details.order_id, DATEDIFF(NOW(), orders.order_date) AS `Day since sold`
+FROM order_details
+JOIN orders ON orders.order_id = order_details.order_id;
+```
+![Screenshot 2025-04-10 at 18 38 58](https://github.com/user-attachments/assets/5bf173c3-9f62-4625-a9d8-2cadcde5c521)
+<br />
+<br />
+```
+-- Identify sales made during weekdays versus weekends
+SELECT order_details.order_id,
+    CASE
+        WHEN DAYOFWEEK(orders.order_date) IN (1, 7) THEN 'Weekend'
+        ELSE 'Weekday'
+    END AS `Day type`
+FROM order_details
+JOIN orders ON order_details.order_id = orders.order_id;
+```
+![Screenshot 2025-04-10 at 18 42 56](https://github.com/user-attachments/assets/98921069-d1b0-46cc-b668-0bd65025f008)
