@@ -466,4 +466,4 @@ This analysis highlights how SQL can be used to derive meaningful insights from 
 
 ##  License
 
-See the <a href="https://github.com/DevAdedoyin/weatherapp/blob/master/LICENSE.MD">LICENSE.md</a> file for license rights and limitations (MIT).
+See the <a href="https://github.com/DevAdedoyin/Northwind-SQL-Analysis/blob/master/LICENSE.MD">LICENSE.md</a> file for license rights and limitations (MIT).
