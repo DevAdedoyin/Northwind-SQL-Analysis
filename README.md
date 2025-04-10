@@ -94,8 +94,69 @@ SELECT * FROM order_details;
 ```
 ![Screenshot 2025-04-10 at 10 42 00](https://github.com/user-attachments/assets/3d81b3cf-b780-420d-8f11-b180b1265fcf)
 
+---
+
+## 👥 Customer Insights
+
+- Count customers by country/city
+- Identify customers in London or with specific contact names
+- Retrieve specific contact information
+
+### Customer Insights Code and Output
+```
+-- Retrieve customer name, address, and post code from the customers table.
+SELECT company_name, address, postal_code FROM customers;
+```
+![Screenshot 2025-04-10 at 11 01 04](https://github.com/user-attachments/assets/27808dfc-3d48-4692-99cb-d9d427b355ae)
 
 
+```
+-- Display info about each employee
+SELECT first_name, Notes FROM employees;
+```
+![Screenshot 2025-04-10 at 11 02 22](https://github.com/user-attachments/assets/b7ae84cc-65ee-4915-80ad-0b5cf3f2d4a7)
+
+
+```
+-- Display detail of the customer(s) who has Maria Larsson as their contact name
+SELECT * FROM customers WHERE contact_name = 'Maria Larsson';
+```
+![Screenshot 2025-04-10 at 11 03 06](https://github.com/user-attachments/assets/95580334-73cb-4460-a90b-824cd7a5d1cc)
+
+
+```
+-- Get the phone number of Federal Shipping and United Package
+SELECT company_name, Phone FROM shippers WHERE company_name IN('Federal Shipping', 'United Package');
+```
+![Screenshot 2025-04-10 at 11 04 42](https://github.com/user-attachments/assets/b4124331-5b4c-460a-a9ab-a840e687f6c0)
+
+
+```
+-- Count the number of customers we have in each country
+SELECT Country, COUNT(Country) AS `Number of Customers` FROM customers GROUP BY Country ORDER BY `Number of Customers` DESC;
+```
+![Screenshot 2025-04-10 at 11 06 24](https://github.com/user-attachments/assets/f2504e5d-1b7c-4ad6-89da-2d72d56419cc)
+
+
+```
+-- Calculate the total number of countries with customers
+SELECT COUNT(DISTINCT Country) AS `Total Number of Countries` FROM customers;
+```
+![Screenshot 2025-04-10 at 11 07 50](https://github.com/user-attachments/assets/f3356868-5315-429c-8a1e-ce1043aaffa9)
+
+
+```
+-- Count the number of customers we have in London and Madrid City
+SELECT City, COUNT(City) AS `Number of Customers` FROM customers WHERE City IN('London', 'Madrid') GROUP BY City;
+```
+![Screenshot 2025-04-10 at 11 08 35](https://github.com/user-attachments/assets/9babc495-5909-4021-a097-e02b6355ddaa)
+
+
+```
+-- Get the Name, address and postal code of customers in London
+SELECT company_name, address, postal_code FROM customers WHERE City = 'London';
+```
+![Screenshot 2025-04-10 at 11 09 15](https://github.com/user-attachments/assets/2e7950d1-040d-494e-b1b7-1efd45187ba0)
 
 
 
