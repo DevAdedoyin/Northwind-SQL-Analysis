@@ -48,9 +48,10 @@ Initial queries to inspect the structure and sample contents of key tables such 
 
 ```
 -- Retrieve all columns from the customers table.
-SELECT * FROM customers; 
-```
+SELECT * FROM customers;
 ![Screenshot 2025-04-10 at 10 27 07](https://github.com/user-attachments/assets/97cc139c-f136-481e-b9e0-f4cd0ed00324)
+```
+
 
 ```
 -- Retrieve all columns from the employees table.
