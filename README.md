@@ -367,7 +367,8 @@ JOIN orders ON order_details.order_id = orders.order_id;
 SELECT * FROM orders WHERE shipped_date = '1997-02-14';
 ```
 ![Screenshot 2025-04-10 at 21 38 10](https://github.com/user-attachments/assets/65bf14c3-9ff9-48e6-a9b2-4e36a46ea4f7)
-
+<br />
+<br />
 ```
 -- Count order per day from the orders table
 SELECT order_date, COUNT(order_date) AS `Order Count` FROM orders GROUP BY order_date ORDER BY `Order Count` DESC;
@@ -379,7 +380,8 @@ SELECT order_date, COUNT(order_date) AS `Order Count` FROM orders GROUP BY order
 SELECT order_id, DATE_FORMAT(order_date, '%a %D %M, %Y') AS `Date` FROM orders LIMIT 20;
 ```
 ![Screenshot 2025-04-10 at 21 39 55](https://github.com/user-attachments/assets/ad991f32-c456-4eb2-a1f7-2f47a7fc8b07)
-
+<br />
+<br />
 ```
 -- Count the number of orders made in each month.
 SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, COUNT(*) AS `Order Count`
@@ -387,7 +389,8 @@ FROM orders
 GROUP BY month;
 ```
 ![Screenshot 2025-04-10 at 21 40 52](https://github.com/user-attachments/assets/893d4752-b1c6-497f-a857-efde547edcd8)
-
+<br />
+<br />
 ```
 -- Extract the month and year from the sale date and count the number of sales for each month.
 SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS `Month`, COUNT(*) AS `Number of Sales per Month`
@@ -396,7 +399,8 @@ JOIN order_details ON orders.order_id = order_details.order_id
 GROUP BY `Month`;
 ```
 ![Screenshot 2025-04-10 at 21 41 54](https://github.com/user-attachments/assets/4eee6c23-bdee-4cd2-8eea-fab86e36c920)
-
+<br />
+<br />
 ```
 -- Calculate the number of days between the current date and the sale date for each sale.
 SELECT order_details.order_id, DATEDIFF(NOW(), orders.order_date) AS `Day since sold`
@@ -404,7 +408,8 @@ FROM order_details
 JOIN orders ON orders.order_id = order_details.order_id;
 ```
 ![Screenshot 2025-04-10 at 21 42 46](https://github.com/user-attachments/assets/20b9d9b1-e7bf-417f-89cc-f7cbfa93ceaa)
-
+<br />
+<br />
 ```
 -- Identify sales made during weekdays versus weekends
 SELECT order_details.order_id,
@@ -416,3 +421,5 @@ FROM order_details
 JOIN orders ON order_details.order_id = orders.order_id;
 ```
 ![Screenshot 2025-04-10 at 21 44 02](https://github.com/user-attachments/assets/74542d52-335d-4115-995d-631f24855995)
+
+---
