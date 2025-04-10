@@ -229,3 +229,49 @@ FROM products
 WHERE products.product_id NOT IN (SELECT DISTINCT order_details.product_id FROM order_details);
 ```
 ![Screenshot 2025-04-10 at 11 36 54](https://github.com/user-attachments/assets/afc834d0-7448-4429-afcd-9865d5f91e2e)
+
+---
+
+## 💰 Sales & Revenue Analysis
+
+- Total freight and product revenue
+- Monthly order count and revenue trends
+- Categorize orders by total amount
+- Rank products by revenue
+
+```
+-- What is the total freight order to 2dp
+SELECT ROUND(SUM(freight), 2) AS `Total Freight` FROM orders;
+```
+![Screenshot 2025-04-10 at 11 43 29](https://github.com/user-attachments/assets/5c54c0dc-2180-47b8-81b6-0dd2958a9c69)
+
+
+```
+-- Retrieve the product_name and total_price from the order_details table, calculating the total_price as quantity multiplied by unit_price.
+SELECT products.product_name, order_details.unit_price * order_details.quantity AS `Total Price`
+FROM order_details
+INNER JOIN products ON products.product_id = order_details.product_id;
+```
+![Screenshot 2025-04-10 at 11 47 30](https://github.com/user-attachments/assets/6bbc68cd-4bd5-427e-9874-ceef6e5cae49)
+
+
+```
+-- Calculate the total revenue generated from sales for each product category.
+SELECT categories.category_name, ROUND(SUM(order_details.unit_price * order_details.quantity), 2) AS `Total Revenue`
+FROM categories
+JOIN products ON categories.category_id = products.category_id
+JOIN order_details ON order_details.product_id = products.product_id
+GROUP BY categories.category_name
+ORDER BY `Total Revenue` DESC;
+```
+![Screenshot 2025-04-10 at 11 48 35](https://github.com/user-attachments/assets/f7f9f452-4797-4d9f-a56a-ae7e6feb84b5)
+
+
+```
+-- Retrieve the product name and total sales revenue for each product.
+SELECT products.product_name, SUM(order_details.unit_price * order_details.quantity) AS `Total Sales Revenue`
+FROM order_details
+JOIN products ON order_details.product_id = products.product_id
+GROUP BY products.product_name;
+```
+![Screenshot 2025-04-10 at 11 50 31](https://github.com/user-attachments/assets/4d26b27a-fce5-4053-8ca0-57c59e672965)
