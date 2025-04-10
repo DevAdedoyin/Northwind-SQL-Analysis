@@ -14,9 +14,8 @@ This project contains a detailed SQL analysis of the Northwind sample database, 
 6. [Sales & Revenue Analysis](#sales--revenue-analysis)
 7. [Order Analysis](#order-analysis)
 8. [Performance Metrics](#performance-metrics)
-9. [Advanced Queries](#advanced-queries)
-10. [Views & Indexing](#views--indexing)
-11. [Conclusion](#conclusion)
+9. [Conclusion](#conclusion)
+10. [License](#license)  
 
 ---
 
@@ -423,3 +422,48 @@ JOIN orders ON order_details.order_id = orders.order_id;
 ![Screenshot 2025-04-10 at 21 44 02](https://github.com/user-attachments/assets/74542d52-335d-4115-995d-631f24855995)
 
 ---
+
+
+## 🔍 Performance Metrics
+
+- Top 3 products by revenue percentage
+- Most frequently sold products
+- Average quantity sold for high-value items
+
+```
+-- Calculate average shipping time per order in days
+SELECT AVG(DATEDIFF(shipped_date, order_date)) AS `Avg Shipping Days`
+FROM orders
+WHERE shipped_date IS NOT NULL;
+```
+![Screenshot 2025-04-10 at 21 53 45](https://github.com/user-attachments/assets/a9fcda5e-8bfc-401c-9894-7600bfe56b00)
+<br />
+<br />
+```
+-- Calculate order fulfillment time per employee
+SELECT employee_id, AVG(DATEDIFF(shipped_date, order_date)) AS `Avg Fulfillment Time`
+FROM orders
+WHERE shipped_date IS NOT NULL
+GROUP BY employee_id;
+```
+![Screenshot 2025-04-10 at 21 54 57](https://github.com/user-attachments/assets/d2b7aeef-1e94-47a3-a9c2-4b69e2dee1e2)
+<br />
+<br />
+```
+-- Total orders per employee
+SELECT employee_id, COUNT(order_id) AS `Total Orders`
+FROM orders
+GROUP BY employee_id
+ORDER BY `Total Orders` DESC;
+```
+![Screenshot 2025-04-10 at 21 55 44](https://github.com/user-attachments/assets/ba6bf634-a689-418e-8bb9-013674699558)
+
+---
+
+📄 Conclusion
+
+This analysis highlights how SQL can be used to derive meaningful insights from the Northwind database. From customer trends and order analysis to performance metrics and indexing strategies, these queries can be adapted and expanded for real world data applications.
+
+##  License
+
+See the <a href="https://github.com/DevAdedoyin/weatherapp/blob/master/LICENSE.MD">LICENSE.md</a> file for license rights and limitations (MIT).
