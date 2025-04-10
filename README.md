@@ -52,11 +52,13 @@ SELECT * FROM customers;
 ```
 ![Screenshot 2025-04-10 at 10 27 07](https://github.com/user-attachments/assets/97cc139c-f136-481e-b9e0-f4cd0ed00324)
 <br />
+<br />
 ```
 -- Retrieve all columns from the employees table.
 SELECT * FROM employees;
 ```
 ![Screenshot 2025-04-10 at 10 31 19](https://github.com/user-attachments/assets/d22b61b0-0f0d-43aa-9066-084a7b7fa5ef)
+<br />
 <br />
 ```
 -- Retrieve all columns from the categories table.
@@ -64,11 +66,13 @@ SELECT * FROM categories;
 ```
 ![Screenshot 2025-04-10 at 10 33 45](https://github.com/user-attachments/assets/6e3dc2cb-74c0-431f-a84d-13fe74b58940)
 <br />
+<br />
 ```
 -- Retrieve all columns from the shippers table.
 SELECT * FROM shippers;
 ```
 ![Screenshot 2025-04-10 at 10 34 58](https://github.com/user-attachments/assets/ba42948c-255a-45ea-bb07-67a9fa68e370)
+<br />
 <br />
 ```
 -- Retrieve all columns from the suppliers table.
@@ -76,17 +80,20 @@ SELECT * FROM suppliers;
 ```
 ![Screenshot 2025-04-10 at 10 35 59](https://github.com/user-attachments/assets/78d4d597-72a6-4717-a443-f1e5a976ed52)
 <br />
+<br />
 ```
 -- Retrieve all columns from the products table.
 SELECT * FROM products;
 ```
 ![Screenshot 2025-04-10 at 10 39 36](https://github.com/user-attachments/assets/b2f7ee12-5192-404c-8f11-b8a43eab6f3c)
 <br />
+<br />
 ```
 -- Retrieve all columns from the orders table.
 SELECT * FROM orders;
 ```
 ![Screenshot 2025-04-10 at 10 40 43](https://github.com/user-attachments/assets/c8ea695a-8e98-4e6d-b50e-f89a2cd588ab)
+<br />
 <br />
 ```
 -- Retrieve all columns from the order_details table.
@@ -109,11 +116,13 @@ SELECT company_name, address, postal_code FROM customers;
 ```
 ![Screenshot 2025-04-10 at 11 01 04](https://github.com/user-attachments/assets/27808dfc-3d48-4692-99cb-d9d427b355ae)
 <br />
+<br />
 ```
 -- Display info about each employee
 SELECT first_name, Notes FROM employees;
 ```
 ![Screenshot 2025-04-10 at 11 02 22](https://github.com/user-attachments/assets/b7ae84cc-65ee-4915-80ad-0b5cf3f2d4a7)
+<br />
 <br />
 ```
 -- Display detail of the customer(s) who has Maria Larsson as their contact name
@@ -121,11 +130,13 @@ SELECT * FROM customers WHERE contact_name = 'Maria Larsson';
 ```
 ![Screenshot 2025-04-10 at 11 03 06](https://github.com/user-attachments/assets/95580334-73cb-4460-a90b-824cd7a5d1cc)
 <br />
+<br />
 ```
 -- Get the phone number of Federal Shipping and United Package
 SELECT company_name, Phone FROM shippers WHERE company_name IN('Federal Shipping', 'United Package');
 ```
 ![Screenshot 2025-04-10 at 11 04 42](https://github.com/user-attachments/assets/b4124331-5b4c-460a-a9ab-a840e687f6c0)
+<br />
 <br />
 ```
 -- Count the number of customers we have in each country
@@ -133,17 +144,20 @@ SELECT Country, COUNT(Country) AS `Number of Customers` FROM customers GROUP BY 
 ```
 ![Screenshot 2025-04-10 at 11 06 24](https://github.com/user-attachments/assets/f2504e5d-1b7c-4ad6-89da-2d72d56419cc)
 <br />
+<br />
 ```
 -- Calculate the total number of countries with customers
 SELECT COUNT(DISTINCT Country) AS `Total Number of Countries` FROM customers;
 ```
 ![Screenshot 2025-04-10 at 11 07 50](https://github.com/user-attachments/assets/f3356868-5315-429c-8a1e-ce1043aaffa9)
 <br />
+<br />
 ```
 -- Count the number of customers we have in London and Madrid City
 SELECT City, COUNT(City) AS `Number of Customers` FROM customers WHERE City IN('London', 'Madrid') GROUP BY City;
 ```
 ![Screenshot 2025-04-10 at 11 08 35](https://github.com/user-attachments/assets/9babc495-5909-4021-a097-e02b6355ddaa)
+<br />
 <br />
 ```
 -- Get the Name, address and postal code of customers in London
@@ -167,11 +181,13 @@ SELECT Country, COUNT(Country) AS `Number of Suppliers` FROM suppliers GROUP BY 
 ```
 ![Screenshot 2025-04-10 at 11 29 41](https://github.com/user-attachments/assets/bcf62ddf-9d26-4f2e-a967-b747c5aa2d8c)
 <br />
+<br />
 ```
 -- Get the product name and product ID for product with unit price greater than 50
 SELECT product_id, product_name, unit_price FROM products WHERE unit_price > 50 ORDER BY unit_price DESC;
 ```
 ![Screenshot 2025-04-10 at 11 30 56](https://github.com/user-attachments/assets/deaf459f-7fe3-48dd-93ab-891cd2254e0c)
+<br />
 <br />
 ```
 -- Get the total number of discontinued order
@@ -179,11 +195,13 @@ SELECT SUM(discontinued) AS `Total Discontinued Orders` FROM products;
 ```
 ![Screenshot 2025-04-10 at 11 31 40](https://github.com/user-attachments/assets/e646569e-9941-43d0-9493-96c55af398ee)
 <br />
+<br />
 ```
 -- Calculate the average unit_price of products in the Products table to 2dp
 SELECT ROUND(AVG(unit_price), 2) AS `Average Unit Price` FROM products;
 ```
 ![Screenshot 2025-04-10 at 11 32 21](https://github.com/user-attachments/assets/6bd7b312-0501-4184-9aba-fa1338500f6d)
+<br />
 <br />
 ```
 -- Display the category each product belongs to
@@ -192,6 +210,7 @@ FROM products
 INNER JOIN categories ON products.category_id = categories.category_id;
 ```
 ![Screenshot 2025-04-10 at 11 33 25](https://github.com/user-attachments/assets/993a3762-3521-4aa0-bad7-99b61666b6ac)
+<br />
 <br />
 ```
 -- Find the total unit price for products whose categories are beverages
@@ -202,11 +221,13 @@ WHERE categories.category_name = 'Beverages';
 ```
 ![Screenshot 2025-04-10 at 11 34 28](https://github.com/user-attachments/assets/2ac9aab7-9f9b-4e55-8389-3ed55691820c)
 <br />
+<br />
 ```
 -- Display the products that have between 40 to 100 worth unit price
 SELECT products.product_name, products.unit_price FROM products WHERE unit_price BETWEEN 40 AND 100;
 ```
 ![Screenshot 2025-04-10 at 11 35 13](https://github.com/user-attachments/assets/9efcb503-6c78-4de1-9791-e173ff2c5895)
+<br />
 <br />
 ```
 -- Find the Products Not Sold from Products table
@@ -231,6 +252,7 @@ SELECT ROUND(SUM(freight), 2) AS `Total Freight` FROM orders;
 ```
 ![Screenshot 2025-04-10 at 11 43 29](https://github.com/user-attachments/assets/5c54c0dc-2180-47b8-81b6-0dd2958a9c69)
 <br />
+<br />
 ```
 -- Retrieve the product_name and total_price from the order_details table, calculating the total_price as quantity multiplied by unit_price.
 SELECT products.product_name, order_details.unit_price * order_details.quantity AS `Total Price`
@@ -238,6 +260,7 @@ FROM order_details
 INNER JOIN products ON products.product_id = order_details.product_id;
 ```
 ![Screenshot 2025-04-10 at 11 47 30](https://github.com/user-attachments/assets/6bbc68cd-4bd5-427e-9874-ceef6e5cae49)
+<br />
 <br />
 ```
 -- Calculate the total revenue generated from sales for each product category.
@@ -250,6 +273,7 @@ ORDER BY `Total Revenue` DESC;
 ```
 ![Screenshot 2025-04-10 at 11 48 35](https://github.com/user-attachments/assets/f7f9f452-4797-4d9f-a56a-ae7e6feb84b5)
 <br />
+<br />
 ```
 -- Retrieve the product name and total sales revenue for each product.
 SELECT products.product_name, SUM(order_details.unit_price * order_details.quantity) AS `Total Sales Revenue`
@@ -258,3 +282,6 @@ JOIN products ON order_details.product_id = products.product_id
 GROUP BY products.product_name;
 ```
 ![Screenshot 2025-04-10 at 11 50 31](https://github.com/user-attachments/assets/4d26b27a-fce5-4053-8ca0-57c59e672965)
+
+---
+
