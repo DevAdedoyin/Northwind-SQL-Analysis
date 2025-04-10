@@ -158,5 +158,74 @@ SELECT company_name, address, postal_code FROM customers WHERE City = 'London';
 ```
 ![Screenshot 2025-04-10 at 11 09 15](https://github.com/user-attachments/assets/2e7950d1-040d-494e-b1b7-1efd45187ba0)
 
+---
+
+## 📦 Supplier & Product Insights
+
+- Analyze suppliers by country
+- Identify top-priced or discontinued products
+- Category-to-product relationships
+- Products not sold and price-based filters
+
+### Supplier & Products Insights Code and Output
+```
+-- Which country has the highest supplier
+SELECT Country, COUNT(Country) AS `Number of Suppliers` FROM suppliers GROUP BY Country ORDER BY COUNT(Country) DESC LIMIT 1;
+```
+![Screenshot 2025-04-10 at 11 29 41](https://github.com/user-attachments/assets/bcf62ddf-9d26-4f2e-a967-b747c5aa2d8c)
 
 
+```
+-- Get the product name and product ID for product with unit price greater than 50
+SELECT product_id, product_name, unit_price FROM products WHERE unit_price > 50 ORDER BY unit_price DESC;
+```
+![Screenshot 2025-04-10 at 11 30 56](https://github.com/user-attachments/assets/deaf459f-7fe3-48dd-93ab-891cd2254e0c)
+
+
+```
+-- Get the total number of discontinued order
+SELECT SUM(discontinued) AS `Total Discontinued Orders` FROM products;
+```
+![Screenshot 2025-04-10 at 11 31 40](https://github.com/user-attachments/assets/e646569e-9941-43d0-9493-96c55af398ee)
+
+
+```
+-- Calculate the average unit_price of products in the Products table to 2dp
+SELECT ROUND(AVG(unit_price), 2) AS `Average Unit Price` FROM products;
+```
+![Screenshot 2025-04-10 at 11 32 21](https://github.com/user-attachments/assets/6bd7b312-0501-4184-9aba-fa1338500f6d)
+
+
+```
+-- Display the category each product belongs to
+SELECT products.category_id, products.product_name, categories.category_name
+FROM products
+INNER JOIN categories ON products.category_id = categories.category_id;
+```
+![Screenshot 2025-04-10 at 11 33 25](https://github.com/user-attachments/assets/993a3762-3521-4aa0-bad7-99b61666b6ac)
+
+
+```
+-- Find the total unit price for products whose categories are beverages
+SELECT categories.category_name, SUM(products.unit_price) AS `Total Beverage Unit Price`
+FROM products
+INNER JOIN categories ON products.category_id = categories.category_id
+WHERE categories.category_name = 'Beverages';
+```
+![Screenshot 2025-04-10 at 11 34 28](https://github.com/user-attachments/assets/2ac9aab7-9f9b-4e55-8389-3ed55691820c)
+
+
+```
+-- Display the products that have between 40 to 100 worth unit price
+SELECT products.product_name, products.unit_price FROM products WHERE unit_price BETWEEN 40 AND 100;
+```
+![Screenshot 2025-04-10 at 11 35 13](https://github.com/user-attachments/assets/9efcb503-6c78-4de1-9791-e173ff2c5895)
+
+
+```
+-- Find the Products Not Sold from Products table
+SELECT products.product_id, products.product_name
+FROM products
+WHERE products.product_id NOT IN (SELECT DISTINCT order_details.product_id FROM order_details);
+```
+![Screenshot 2025-04-10 at 11 36 54](https://github.com/user-attachments/assets/afc834d0-7448-4429-afcd-9865d5f91e2e)
