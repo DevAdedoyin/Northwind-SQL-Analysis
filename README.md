@@ -2,6 +2,8 @@
 
 This project contains a detailed SQL analysis of the Northwind sample database, covering various business aspects like customer behavior, product performance, revenue, and order trends.
 
+![northwind](https://github.com/user-attachments/assets/d00d865f-5f57-4ea0-89f2-8ea120a7fe97)
+
 ---
 
 ## 📘 Table of Contents
